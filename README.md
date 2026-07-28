@@ -44,3 +44,19 @@ OS Ubuntu 20.04
 #
 
 2)  Попасть в систему без пароля несколькими способами.
+
+*  Запустить виртуальную машину и при выборе ядра для загрузки нажать e - в данном контексте edit. Попадаем в окно, где мы можем изменить параметры загрузки.
+#
+<img width="1245" height="876" alt="Снимок экрана от 2026-07-28 16-18-11" src="https://github.com/user-attachments/assets/57cedad7-ba44-40d6-8791-fd8b5e3bedd9" />
+#
+Добавляем в строку linux	/vmlinuz-5.4.0-216-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro init=/bin/bash 
+<img width="1245" height="876" alt="Снимок экрана от 2026-07-28 16-22-28" src="https://github.com/user-attachments/assets/b1c19df3-66b9-4112-aefa-49f5f35fa8f8" />
+#
+* Нажимаем Ctrl+X загружаемся в систему
+<img width="1245" height="908" alt="Снимок экрана от 2026-07-28 16-25-18" src="https://github.com/user-attachments/assets/e4399cb6-d247-4d8c-9820-1949433b2ba2" />
+#
+* ОС теперь в режиме RO, Надо перементировать в RW сомандой и проврить на запись через создание файла
+
+      mount -o remount,rw /
+<img width="957" height="903" alt="Снимок экрана от 2026-07-28 16-31-38" src="https://github.com/user-attachments/assets/79ae75bb-062a-4aa7-83de-0df42ccb3985" />
+#

@@ -25,6 +25,8 @@ OS Ubuntu 20.04
     Found linux image: /boot/vmlinuz-5.4.0-216-generic
     Found initrd image: /boot/initrd.img-5.4.0-216-generic
     done
+* Презагрузка
+#    
     root@ubuntu:~# reboot
 
 * После перезагрузки можно  

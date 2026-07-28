@@ -9,7 +9,7 @@ OS Ubuntu 20.04
 1)  Включить отображение меню Grub.
 
 * Для отображения меню нужно отредактировать конфигурационный файл. выставим 15 сек
-
+#
     root@ubuntu:~# nano /etc/default/grub
     GRUB_DEFAULT=0
     #GRUB_TIMEOUT_STYLE=hidden

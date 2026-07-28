@@ -74,4 +74,79 @@ OS Ubuntu 20.04
 #
 #
 3) Установить систему с LVM, после чего переименовать VG
-   
+   Имется готовая ОС с лвм 
+#
+    root@ubuntu:~# vgs
+    VG        #PV #LV #SN Attr   VSize   VFree 
+    ubuntu-vg   1   1   0 wz--n- <11.25g <1.25g
+#
+  Переименуем VG ubuntu-vg в diectory. 
+  
+    root@ubuntu:~# vgrename ubuntu-vg diectory
+    Volume group "ubuntu-vg" successfully renamed to "diectory"
+#
+  Далее правим /boot/grub/grub.cfg. Везде заменяем старое название VG на новое  diectory.
+  
+    export linux_gfx_mode
+    menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-c3f58731-e3ea-4b9f-aca4-ff6371d9985c' {
+        recordfail
+        load_video
+        gfxmode $linux_gfx_mode
+        insmod gzio
+        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+        insmod part_gpt
+        insmod ext2
+        if [ x$feature_platform_search_hint = xy ]; then
+          search --no-floppy --fs-uuid --set=root  44454575-c078-4e6c-8f31-20893975e678
+        else
+          search --no-floppy --fs-uuid --set=root 44454575-c078-4e6c-8f31-20893975e678
+        fi
+        linux   /vmlinuz-5.4.0-216-generic root=/dev/mapper/diectory-ubuntu--lv ro
+        initrd  /initrd.img-5.4.0-216-generic
+    }
+    submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-c3f58731-e3ea-4b9f-aca4-ff6371d9985c' {
+        menuentry 'Ubuntu, with Linux 5.4.0-216-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.4.0-216-generic>
+                recordfail
+                load_video
+                gfxmode $linux_gfx_mode
+                insmod gzio
+                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+                insmod part_gpt
+                insmod ext2
+                if [ x$feature_platform_search_hint = xy ]; then
+                  search --no-floppy --fs-uuid --set=root  44454575-c078-4e6c-8f31-20893975e678
+                else
+                  search --no-floppy --fs-uuid --set=root 44454575-c078-4e6c-8f31-20893975e678
+                fi
+                echo    'Loading Linux 5.4.0-216-generic ...'
+                linux   /vmlinuz-5.4.0-216-generic root=/dev/mapper/diectory-ubuntu--lv ro
+                echo    'Loading initial ramdisk ...'
+                initrd  /initrd.img-5.4.0-216-generic
+        }
+        menuentry 'Ubuntu, with Linux 5.4.0-216-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5>
+                recordfail
+                load_video
+                insmod gzio
+                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+                insmod part_gpt
+                insmod ext2
+                if [ x$feature_platform_search_hint = xy ]; then
+                  search --no-floppy --fs-uuid --set=root  44454575-c078-4e6c-8f31-20893975e678
+                else
+                  search --no-floppy --fs-uuid --set=root 44454575-c078-4e6c-8f31-20893975e678
+                fi
+                echo    'Loading Linux 5.4.0-216-generic ...'
+                linux   /vmlinuz-5.4.0-216-generic root=/dev/mapper/diectory-ubuntu--lv ro recovery nomodeset dis_ucode_ldr
+                echo    'Loading initial ramdisk ...'
+                initrd  /initrd.img-5.4.0-216-generic
+        }
+      }
+#
+Настройку update-grub применять не нужно, сразу перезагружаем вм.
+Ждем загрузку ОС и проверяем
+<img width="1172" height="979" alt="image" src="https://github.com/user-attachments/assets/9cbaa863-873c-40fd-ba8d-9c6e78288204" />
+# Ос успешноо загрузилась и видно новое именование VG
+Переименуем еще для прикола LV ubuntu-lv в  sobaka.
+<img width="1172" height="979" alt="image" src="https://github.com/user-attachments/assets/02c1a63d-96c3-4661-b616-60dce149e5fd" />
+#
+# Все успешно переименовалось и применилось.!

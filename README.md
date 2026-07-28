@@ -39,3 +39,4 @@ OS Ubuntu 20.04
     # Fallback normal timeout code in case the timeout_style feature is
       set timeout=15  #Наше установленное время
 #
+<img width="1245" height="876" alt="Снимок экрана от 2026-07-28 16-13-00" src="https://github.com/user-attachments/assets/f269d34f-b049-4546-886f-7ba1fa409ecc" />

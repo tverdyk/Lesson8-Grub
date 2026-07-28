@@ -41,5 +41,6 @@ OS Ubuntu 20.04
 #
 <img width="1245" height="876" alt="Снимок экрана от 2026-07-28 16-13-00" src="https://github.com/user-attachments/assets/f269d34f-b049-4546-886f-7ba1fa409ecc" />
 
+#
 
 2)  Попасть в систему без пароля несколькими способами.
